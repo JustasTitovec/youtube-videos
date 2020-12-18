@@ -1,36 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class SearchBar extends React.Component {
-  state = {
-    term: '',
-  };
+const SearchBar = ({ onFormSubmit }) => {
+  const [term, setTerm] = useState('');
 
-  onInputChange = (e) => {
-    this.setState({ term: e.target.value });
-  };
-
-  onFormSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onFormSubmit(this.state.term);
+    onFormSubmit(term);
   };
 
-  render() {
-    return (
-      <div className="search-bar ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
-          <div className="field">
-            <label>Video search</label>
-            <input
-              onChange={this.onInputChange}
-              value={this.state.term}
-              type="text"
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-bar ui segment">
+      <form onSubmit={onSubmit} className="ui form">
+        <div className="field">
+          <label>Video search</label>
+          <input
+            onChange={(e) => setTerm(e.target.value)}
+            value={term}
+            type="text"
+          />
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default SearchBar;
+
+// class SearchBar extends React.Component {
+//   state = {
+//     term: '',
+//   };
+
+//   onInputChange = (e) => {
+//     this.setState({ term: e.target.value });
+//   };
+
+//   onFormSubmit = (e) => {
+//     e.preventDefault();
+
+//     this.props.onFormSubmit(this.state.term);
+//   };
+
+//   render() {
+//     return (
+//       <div className="search-bar ui segment">
+//         <form onSubmit={this.onFormSubmit} className="ui form">
+//           <div className="field">
+//             <label>Video search</label>
+//             <input
+//               onChange={this.onInputChange}
+//               value={this.state.term}
+//               type="text"
+//             />
+//           </div>
+//         </form>
+//       </div>
+//     );
+//   }
+// }
+
+// export default SearchBar;
